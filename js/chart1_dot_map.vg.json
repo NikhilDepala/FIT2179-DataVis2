@@ -1,0 +1,81 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Wildlife Sightings Across Melbourne (BioBlitz 2014)",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 550,
+    "height": 450,
+    "projection": {
+        "type": "equalEarth",
+        "center": [144.96, -37.81],
+        "scale": 80000
+    },
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "oceans"
+                }
+            },
+            "mark": {"type": "geoshape", "fill": "#d6eaf8"}
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_110m_admin_0_countries"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "#e8f5e9",
+                "stroke": "#aaa",
+                "strokeWidth": 0.5
+            }
+        },
+        {
+            "data": {"url": "data/bioblitz.csv"},
+            "mark": {
+                "type": "circle",
+                "opacity": 0.7,
+                "size": 60
+            },
+            "params": [
+                {
+                    "name": "taxa_highlight",
+                    "select": {"type": "point", "fields": ["Taxa"]},
+                    "bind": "legend"
+                }
+            ],
+            "encoding": {
+                "longitude": {"field": "Longitude", "type": "quantitative"},
+                "latitude": {"field": "Latitude", "type": "quantitative"},
+                "color": {
+                    "field": "Taxa",
+                    "type": "nominal",
+                    "title": "Animal Group",
+                    "scale": {
+                        "domain": ["Bird", "Plant", "Insect", "Mammal", "Reptile", "Amphibian", "Cnidaria", "Fungi"],
+                        "range": ["#1f77b4", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b", "#17becf", "#e377c2", "#bcbd22"]
+                    }
+                },
+                "opacity": {
+                    "condition": {"param": "taxa_highlight", "value": 0.7},
+                    "value": 0.1
+                },
+                "tooltip": [
+                    {"field": "Common Name", "type": "nominal", "title": "Species"},
+                    {"field": "Taxa", "type": "nominal", "title": "Group"},
+                    {"field": "Sighting Date", "type": "nominal", "title": "Date"},
+                    {"field": "Data Resource Name", "type": "nominal", "title": "Reported Via"}
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+body {
+    font-family: sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.4em;
+    margin-top: 60px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 6px;
+}
+
+#chart1, #chart6 {
+    margin-top: 20px;
+}
+
+#chart5, #chart9, #chart10 {
+    margin-top: 30px;
+    width: 100%;
+}
