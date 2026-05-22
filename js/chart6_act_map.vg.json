@@ -1,0 +1,130 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Wildlife Incident Locations in Canberra (ACT)",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 500,
+    "height": 450,
+    "projection": {
+        "type": "equirectangular",
+        "center": [149.13, -35.35],
+        "scale": 150000
+    },
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_10m_admin_1_states_provinces.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_10m_admin_1_states_provinces"
+                }
+            },
+            "transform": [
+                {"filter": "datum.properties.iso_a2 == 'AU'"}
+            ],
+            "mark": {
+                "type": "geoshape",
+                "fill": "#f0f0e8",
+                "stroke": "#999",
+                "strokeWidth": 0.8
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/act_incidents.csv"
+            },
+            "params": [
+                {
+                    "name": "species_selection",
+                    "bind": {
+                        "input": "select",
+                        "options": [
+                            null,
+                            "EASTERN GREY KANGAROO",
+                            "WOMBAT",
+                            "BRUSHTAIL POSSUM",
+                            "WALLAROO",
+                            "WALLABY",
+                            "FOX",
+                            "RED NECKED WALLABY",
+                            "BROWN SNAKE",
+                            "MAGPIES",
+                            "SWAMP WALLABY",
+                            "COCKATOO",
+                            "SWAN",
+                            "GALAH"
+                        ],
+                        "labels": [
+                            "Show All",
+                            "Eastern Grey Kangaroo",
+                            "Wombat",
+                            "Brushtail Possum",
+                            "Wallaroo",
+                            "Wallaby",
+                            "Fox",
+                            "Red Necked Wallaby",
+                            "Brown Snake",
+                            "Magpies",
+                            "Swamp Wallaby",
+                            "Cockatoo",
+                            "Swan",
+                            "Galah"
+                        ],
+                        "name": "Filter by Species: "
+                    }
+                }
+            ],
+            "transform": [
+                {
+                    "filter": "species_selection == null || datum.SPECIES == species_selection"
+                }
+            ],
+            "mark": {
+                "type": "circle",
+                "opacity": 0.6,
+                "size": 30
+            },
+            "encoding": {
+                "longitude": {"field": "LONGITUDE", "type": "quantitative"},
+                "latitude": {"field": "LATITUDE", "type": "quantitative"},
+                "color": {
+                    "field": "SPECIES",
+                    "type": "nominal",
+                    "title": "Species",
+                    "scale": {
+                        "domain": [
+                            "EASTERN GREY KANGAROO",
+                            "WOMBAT",
+                            "BRUSHTAIL POSSUM",
+                            "WALLAROO",
+                            "WALLABY",
+                            "FOX",
+                            "RED NECKED WALLABY",
+                            "BROWN SNAKE",
+                            "MAGPIES",
+                            "SWAMP WALLABY",
+                            "COCKATOO",
+                            "SWAN",
+                            "GALAH"
+                        ],
+                        "range": [
+                            "#4e79a7", "#f28e2b", "#e15759", "#76b7b2",
+                            "#59a14f", "#edc948", "#b07aa1", "#ff9da7",
+                            "#9c755f", "#bab0ac", "#17becf", "#1f77b4",
+                            "#aec7e8"
+                        ]
+                    }
+                },
+                "tooltip": [
+                    {"field": "SPECIES", "type": "nominal", "title": "Species"},
+                    {"field": "CREATED_DATE", "type": "nominal", "title": "Date"},
+                    {"field": "LATITUDE", "type": "quantitative", "title": "Latitude", "format": ".4f"},
+                    {"field": "LONGITUDE", "type": "quantitative", "title": "Longitude", "format": ".4f"}
+                ]
+            }
+        }
+    ]
+}

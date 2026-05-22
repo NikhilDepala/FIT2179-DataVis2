@@ -1,0 +1,100 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Wildlife Sightings by Animal Group",
+    "fontSize": 16,
+    "font": "sans-serif",
+    "anchor": "middle"
+  },
+  "width": 380,
+  "height": 380,
+  "data": {
+    "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [{"op": "count", "as": "count"}],
+      "groupby": ["Taxa"]
+    },
+    {
+      "window": [{"op": "sum", "field": "count", "as": "total"}],
+      "frame": [null, null]
+    },
+    {
+      "calculate": "datum.count / datum.total",
+      "as": "pct"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 90, "outerRadius": 150},
+      "encoding": {
+        "theta": {
+          "field": "count",
+          "type": "quantitative",
+          "stack": true
+        },
+        "color": {
+          "field": "Taxa",
+          "type": "nominal",
+          "title": "Animal Group",
+          "scale": {
+            "domain": ["Bird", "Plant", "Insect", "Mammal", "Reptile", "Amphibian", "Cnidaria", "Fungi"],
+            "range": ["#1f77b4", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b", "#17becf", "#e377c2", "#bcbd22"]
+          }
+        },
+        "opacity": {
+          "condition": {"param": "taxa_select", "value": 1},
+          "value": 0.2
+        },
+        "tooltip": [
+          {"field": "Taxa", "type": "nominal", "title": "Animal Group"},
+          {"field": "count", "type": "quantitative", "title": "Sightings"},
+          {"field": "pct", "type": "quantitative", "title": "% of Total", "format": ".1%"}
+        ]
+      },
+      "params": [
+        {
+          "name": "taxa_select",
+          "select": {"type": "point", "fields": ["Taxa"]}
+        }
+      ]
+    },
+    {
+      "transform": [{"filter": "datum.pct >= 0.03"}],
+      "mark": {
+        "type": "text",
+        "radius": 175,
+        "fontSize": 12,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "theta": {
+          "field": "count",
+          "type": "quantitative",
+          "stack": true
+        },
+        "text": {"field": "Taxa", "type": "nominal"},
+        "color": {"value": "#222"}
+      }
+    },
+    {
+      "transform": [{"filter": "datum.pct >= 0.03"}],
+      "mark": {
+        "type": "text",
+        "radius": 192,
+        "fontSize": 10,
+        "fontWeight": "normal"
+      },
+      "encoding": {
+        "theta": {
+          "field": "count",
+          "type": "quantitative",
+          "stack": true
+        },
+        "text": {"field": "pct", "type": "quantitative", "format": ".1%"},
+        "color": {"value": "#555"}
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Wildlife Sightings Over Time (BioBlitz 2014)",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 500,
+    "height": 250,
+    "data": {
+        "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
+    },
+    "transform": [
+        {"filter": "datum['Sighting Date'] != null && datum['Sighting Date'] != ''"}
+    ],
+    "layer": [
+        {
+            "mark": {
+                "type": "area",
+                "line": {"color": "#2d6a4f", "strokeWidth": 2},
+                "color": {
+                    "x1": 1, "y1": 1, "x2": 1, "y2": 0,
+                    "gradient": "linear",
+                    "stops": [
+                        {"offset": 0, "color": "white"},
+                        {"offset": 1, "color": "#52b788"}
+                    ]
+                },
+                "opacity": 0.8
+            },
+            "encoding": {
+                "x": {
+                    "field": "Sighting Date",
+                    "type": "temporal",
+                    "timeUnit": "yearmonthdate",
+                    "title": "Date",
+                    "axis": {"format": "%d %b", "labelAngle": -30}
+                },
+                "y": {
+                    "aggregate": "count",
+                    "type": "quantitative",
+                    "title": "Number of Sightings"
+                },
+                "tooltip": [
+                    {
+                        "field": "Sighting Date",
+                        "type": "temporal",
+                        "timeUnit": "yearmonthdate",
+                        "title": "Date",
+                        "format": "%d %B %Y"
+                    },
+                    {
+                        "aggregate": "count",
+                        "type": "quantitative",
+                        "title": "Sightings"
+                    }
+                ]
+            }
+        },
+        {
+            "mark": {"type": "rule", "color": "#e63946", "strokeDash": [4, 4], "strokeWidth": 1.5},
+            "encoding": {
+                "x": {
+                    "datum": {"year": 2014, "month": 11, "date": 15},
+                    "type": "temporal"
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 5,
+                "dy": -110,
+                "fontSize": 10,
+                "fontStyle": "italic",
+                "color": "#e63946",
+                "fontWeight": "bold"
+            },
+            "encoding": {
+                "x": {
+                    "datum": {"year": 2014, "month": 11, "date": 15},
+                    "type": "temporal"
+                },
+                "y": {"value": 0}
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 5,
+                "fontSize": 10,
+                "fontStyle": "italic",
+                "color": "#e63946",
+                "fontWeight": "bold"
+            },
+            "encoding": {
+                "x": {
+                    "datum": {"year": 2014, "month": 11, "date": 15},
+                    "type": "temporal"
+                },
+                "y": {"value": 20},
+                "text": {"value": "Peak Sightings Day"}
+            }
+        }
+    ]
+}

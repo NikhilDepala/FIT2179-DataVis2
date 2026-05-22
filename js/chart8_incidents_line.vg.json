@@ -1,0 +1,75 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Wildlife Incidents Over Time in Canberra (ACT)",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 450,
+    "height": 250,
+    "data": {
+        "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/act_incidents.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum.CREATED_DATE != null && datum.CREATED_DATE != ''"
+        },
+        {
+            "calculate": "substring(datum.CREATED_DATE, 0, 4)",
+            "as": "year_str"
+        },
+        {
+            "calculate": "toNumber(datum.year_str)",
+            "as": "year_num"
+        }
+    ],
+    "layer": [
+        {
+            "mark": {
+                "type": "line",
+                "strokeWidth": 2.5,
+                "point": {
+                    "filled": true,
+                    "size": 60,
+                    "color": "#e63946"
+                },
+                "color": "#e63946"
+            },
+            "encoding": {
+                "x": {
+                    "field": "year_num",
+                    "type": "ordinal",
+                    "title": "Year",
+                    "axis": {"labelAngle": 0}
+                },
+                "y": {
+                    "aggregate": "count",
+                    "type": "quantitative",
+                    "title": "Number of Incidents"
+                },
+                "tooltip": [
+                    {"field": "year_num", "type": "ordinal", "title": "Year"},
+                    {"aggregate": "count", "type": "quantitative", "title": "Total Incidents"}
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "area",
+                "opacity": 0.15,
+                "color": "#e63946"
+            },
+            "encoding": {
+                "x": {
+                    "field": "year_num",
+                    "type": "ordinal"
+                },
+                "y": {
+                    "aggregate": "count",
+                    "type": "quantitative"
+                }
+            }
+        }
+    ]
+}

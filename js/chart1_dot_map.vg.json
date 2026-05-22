@@ -9,42 +9,35 @@
     "width": 550,
     "height": 450,
     "projection": {
-        "type": "equalEarth",
+        "type": "equirectangular",
         "center": [144.96, -37.81],
-        "scale": 80000
+        "scale": 150000
     },
     "layer": [
         {
             "data": {
-                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_10m_admin_1_states_provinces.topojson",
                 "format": {
                     "type": "topojson",
-                    "feature": "oceans"
+                    "feature": "ne_10m_admin_1_states_provinces"
                 }
             },
-            "mark": {"type": "geoshape", "fill": "#d6eaf8"}
-        },
-        {
-            "data": {
-                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
-                "format": {
-                    "type": "topojson",
-                    "feature": "ne_110m_admin_0_countries"
-                }
-            },
+            "transform": [
+                {"filter": "datum.properties.iso_a2 == 'AU'"}
+            ],
             "mark": {
                 "type": "geoshape",
-                "fill": "#e8f5e9",
-                "stroke": "#aaa",
-                "strokeWidth": 0.5
+                "fill": "#d4e6c3",
+                "stroke": "#888",
+                "strokeWidth": 0.8
             }
         },
         {
-            "data": {"url": "data/bioblitz.csv"},
+            "data": {"url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"},
             "mark": {
                 "type": "circle",
-                "opacity": 0.7,
-                "size": 60
+                "opacity": 0.8,
+                "size": 80
             },
             "params": [
                 {
@@ -66,7 +59,7 @@
                     }
                 },
                 "opacity": {
-                    "condition": {"param": "taxa_highlight", "value": 0.7},
+                    "condition": {"param": "taxa_highlight", "value": 0.8},
                     "value": 0.1
                 },
                 "tooltip": [

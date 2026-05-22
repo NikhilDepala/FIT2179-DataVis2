@@ -1,0 +1,82 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Wildlife Incidents by Species (ACT)",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 350,
+    "height": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/act_incidents.csv"
+    },
+    "transform": [
+        {
+            "aggregate": [{"op": "count", "as": "count"}],
+            "groupby": ["SPECIES"]
+        },
+        {
+            "window": [{"op": "rank", "as": "rank"}],
+            "sort": [{"field": "count", "order": "descending"}]
+        },
+        {"filter": "datum.rank <= 10"}
+    ],
+    "mark": {"type": "bar", "cornerRadiusEnd": 4},
+    "params": [
+        {
+            "name": "species_highlight",
+            "select": {"type": "point", "fields": ["SPECIES"]},
+            "bind": "legend"
+        }
+    ],
+    "encoding": {
+        "y": {
+            "field": "SPECIES",
+            "type": "nominal",
+            "sort": "-x",
+            "title": "Species",
+            "axis": {
+                "labelLimit": 200,
+                "labelFontSize": 11
+            }
+        },
+        "x": {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Number of Incidents"
+        },
+        "color": {
+            "field": "SPECIES",
+            "type": "nominal",
+            "title": "Species",
+            "scale": {
+                "domain": [
+                    "EASTERN GREY KANGAROO",
+                    "WOMBAT",
+                    "BRUSHTAIL POSSUM",
+                    "WALLAROO",
+                    "WALLABY",
+                    "FOX",
+                    "RED NECKED WALLABY",
+                    "BROWN SNAKE",
+                    "MAGPIES",
+                    "SWAMP WALLABY"
+                ],
+                "range": [
+                    "#4e79a7", "#f28e2b", "#e15759", "#76b7b2",
+                    "#59a14f", "#edc948", "#b07aa1", "#ff9da7",
+                    "#9c755f", "#bab0ac"
+                ]
+            }
+        },
+        "opacity": {
+            "condition": {"param": "species_highlight", "value": 1},
+            "value": 0.3
+        },
+        "tooltip": [
+            {"field": "SPECIES", "type": "nominal", "title": "Species"},
+            {"field": "count", "type": "quantitative", "title": "Total Incidents"}
+        ]
+    }
+}

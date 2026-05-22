@@ -1,0 +1,62 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "How Was Wildlife Reported? (Taxa vs Reporting Method)",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 450,
+    "height": 250,
+    "data": {
+        "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum['Data Resource Name'] != null && datum['Data Resource Name'] != ''"
+        },
+        {
+            "aggregate": [{"op": "count", "as": "count"}],
+            "groupby": ["Taxa", "Data Resource Name"]
+        }
+    ],
+    "mark": {"type": "rect", "stroke": "white", "strokeWidth": 1},
+    "encoding": {
+        "y": {
+            "field": "Taxa",
+            "type": "nominal",
+            "title": "Animal Group",
+            "axis": {"labelFontSize": 12}
+        },
+        "x": {
+            "field": "Data Resource Name",
+            "type": "nominal",
+            "title": "Reporting Method",
+            "axis": {
+                "labelAngle": -25,
+                "labelFontSize": 11,
+                "labelLimit": 180
+            }
+        },
+        "color": {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Sightings",
+            "scale": {
+                "scheme": "greens"
+            },
+            "legend": {
+                "title": "No. of Sightings",
+                "gradientLength": 150
+            }
+        },
+        "tooltip": [
+            {"field": "Taxa", "type": "nominal", "title": "Animal Group"},
+            {"field": "Data Resource Name", "type": "nominal", "title": "Reporting Method"},
+            {"field": "count", "type": "quantitative", "title": "Sightings"}
+        ]
+    },
+    "config": {
+        "axis": {"grid": false}
+    }
+}

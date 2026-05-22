@@ -1,0 +1,54 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Top 10 Most Sighted Species (BioBlitz Melbourne 2014)",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 400,
+    "height": 350,
+    "data": {
+        "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
+    },
+    "transform": [
+        {
+            "aggregate": [{"op": "count", "as": "count"}],
+            "groupby": ["Common Name", "Taxa"]
+        },
+        {
+            "window": [{"op": "rank", "as": "rank"}],
+            "sort": [{"field": "count", "order": "descending"}]
+        },
+        {"filter": "datum.rank <= 10"}
+    ],
+    "mark": {"type": "bar", "cornerRadiusEnd": 4},
+    "encoding": {
+        "y": {
+            "field": "Common Name",
+            "type": "nominal",
+            "sort": "-x",
+            "title": "Species",
+            "axis": {"labelLimit": 200}
+        },
+        "x": {
+            "field": "count",
+            "type": "quantitative",
+            "title": "Number of Sightings"
+        },
+        "color": {
+            "field": "Taxa",
+            "type": "nominal",
+            "title": "Animal Group",
+            "scale": {
+                "domain": ["Bird", "Plant", "Insect", "Mammal", "Reptile", "Amphibian", "Cnidaria", "Fungi"],
+                "range": ["#1f77b4", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b", "#17becf", "#e377c2", "#bcbd22"]
+            }
+        },
+        "tooltip": [
+            {"field": "Common Name", "type": "nominal", "title": "Species"},
+            {"field": "Taxa", "type": "nominal", "title": "Group"},
+            {"field": "count", "type": "quantitative", "title": "Sightings"}
+        ]
+    }
+}
