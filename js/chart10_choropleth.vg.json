@@ -1,0 +1,80 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Wildlife Records by State — Where Our Data Comes From",
+        "fontSize": 16,
+        "font": "sans-serif",
+        "anchor": "middle"
+    },
+    "width": 700,
+    "height": 500,
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/STE_2021_AUST_GDA2020_thisone.json",
+                "format": {
+                    "type": "topojson",
+                    "feature": "STE_2021_AUST_GDA2020"
+                }
+            },
+            "transform": [
+                { "filter": "datum.properties.STE_NAME21 !== 'Outside Australia'" },
+                {
+                    "lookup": "properties.STE_NAME21",
+                    "from": {
+                        "data": {
+                            "values": [
+                                { "state": "Australian Capital Territory", "records": 5725, "category": "ACT — 5,725 incidents", "source": "ACT Wildlife Incidents", "note": "Emergency wildlife incidents 2016–2026" },
+                                { "state": "Victoria", "records": 670, "category": "Victoria — 670 sightings", "source": "Melbourne BioBlitz 2014", "note": "Citizen science sightings, November 2014" },
+                                { "state": "New South Wales", "records": 0, "category": "No data", "source": "No data", "note": "Not in dataset" },
+                                { "state": "Queensland", "records": 0, "category": "No data", "source": "No data", "note": "Not in dataset" },
+                                { "state": "South Australia", "records": 0, "category": "No data", "source": "No data", "note": "Not in dataset" },
+                                { "state": "Western Australia", "records": 0, "category": "No data", "source": "No data", "note": "Not in dataset" },
+                                { "state": "Tasmania", "records": 0, "category": "No data", "source": "No data", "note": "Not in dataset" },
+                                { "state": "Northern Territory", "records": 0, "category": "No data", "source": "No data", "note": "Not in dataset" },
+                                { "state": "Other Territories", "records": 0, "category": "No data", "source": "No data", "note": "Not in dataset" }
+                            ]
+                        },
+                        "key": "state",
+                        "fields": ["records", "category", "source", "note"]
+                    }
+                }
+            ],
+            "projection": {
+                "type": "equirectangular",
+                "center": [132, -28],
+                "scale": 850
+            },
+            "mark": {"type": "geoshape", "stroke": "#aaa", "strokeWidth": 0.6},
+            "encoding": {
+                "color": {
+                    "field": "category",
+                    "type": "nominal",
+                    "title": "Data Coverage",
+                    "scale": {
+                        "domain": [
+                            "ACT — 5,725 incidents",
+                            "Victoria — 670 sightings",
+                            "No data"
+                        ],
+                        "range": ["#1a6b2e", "#74c476", "#d9d9d9"]
+                    },
+                    "legend": {
+                        "title": "Data Coverage",
+                        "labelFontSize": 11,
+                        "titleFontSize": 12
+                    }
+                },
+                "tooltip": [
+                    { "field": "properties.STE_NAME21", "type": "nominal", "title": "State / Territory" },
+                    { "field": "records", "type": "quantitative", "title": "Wildlife Records", "format": "," },
+                    { "field": "source", "type": "nominal", "title": "Data Source" },
+                    { "field": "note", "type": "nominal", "title": "Details" }
+                ]
+            }
+        }
+    ],
+    "config": {
+        "view": {"stroke": null}
+    }
+}

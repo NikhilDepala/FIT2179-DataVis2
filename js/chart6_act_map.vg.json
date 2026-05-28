@@ -8,23 +8,61 @@
     },
     "width": 500,
     "height": 450,
-    "projection": {
-        "type": "equirectangular",
-        "center": [149.13, -35.35],
-        "scale": 150000
-    },
+    "params": [
+        {
+            "name": "species_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "EASTERN GREY KANGAROO",
+                    "WOMBAT",
+                    "BRUSHTAIL POSSUM",
+                    "WALLAROO",
+                    "WALLABY",
+                    "FOX",
+                    "RED NECKED WALLABY",
+                    "BROWN SNAKE",
+                    "MAGPIES",
+                    "SWAMP WALLABY",
+                    "COCKATOO",
+                    "SWAN",
+                    "GALAH"
+                ],
+                "labels": [
+                    "Show All",
+                    "Eastern Grey Kangaroo",
+                    "Wombat",
+                    "Brushtail Possum",
+                    "Wallaroo",
+                    "Wallaby",
+                    "Fox",
+                    "Red Necked Wallaby",
+                    "Brown Snake",
+                    "Magpies",
+                    "Swamp Wallaby",
+                    "Cockatoo",
+                    "Swan",
+                    "Galah"
+                ],
+                "name": "Filter by Species: "
+            }
+        }
+    ],
     "layer": [
         {
             "data": {
-                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_10m_admin_1_states_provinces.topojson",
+                "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/STE_2021_AUST_GDA2020_thisone.json",
                 "format": {
                     "type": "topojson",
-                    "feature": "ne_10m_admin_1_states_provinces"
+                    "feature": "STE_2021_AUST_GDA2020"
                 }
             },
-            "transform": [
-                {"filter": "datum.properties.iso_a2 == 'AU'"}
-            ],
+            "projection": {
+                "type": "equirectangular",
+                "center": [149.13, -35.35],
+                "scale": 150000
+            },
             "mark": {
                 "type": "geoshape",
                 "fill": "#f0f0e8",
@@ -36,47 +74,11 @@
             "data": {
                 "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/act_incidents.csv"
             },
-            "params": [
-                {
-                    "name": "species_selection",
-                    "bind": {
-                        "input": "select",
-                        "options": [
-                            null,
-                            "EASTERN GREY KANGAROO",
-                            "WOMBAT",
-                            "BRUSHTAIL POSSUM",
-                            "WALLAROO",
-                            "WALLABY",
-                            "FOX",
-                            "RED NECKED WALLABY",
-                            "BROWN SNAKE",
-                            "MAGPIES",
-                            "SWAMP WALLABY",
-                            "COCKATOO",
-                            "SWAN",
-                            "GALAH"
-                        ],
-                        "labels": [
-                            "Show All",
-                            "Eastern Grey Kangaroo",
-                            "Wombat",
-                            "Brushtail Possum",
-                            "Wallaroo",
-                            "Wallaby",
-                            "Fox",
-                            "Red Necked Wallaby",
-                            "Brown Snake",
-                            "Magpies",
-                            "Swamp Wallaby",
-                            "Cockatoo",
-                            "Swan",
-                            "Galah"
-                        ],
-                        "name": "Filter by Species: "
-                    }
-                }
-            ],
+            "projection": {
+                "type": "equirectangular",
+                "center": [149.13, -35.35],
+                "scale": 150000
+            },
             "transform": [
                 {
                     "filter": "species_selection == null || datum.SPECIES == species_selection"
@@ -96,25 +98,15 @@
                     "title": "Species",
                     "scale": {
                         "domain": [
-                            "EASTERN GREY KANGAROO",
-                            "WOMBAT",
-                            "BRUSHTAIL POSSUM",
-                            "WALLAROO",
-                            "WALLABY",
-                            "FOX",
-                            "RED NECKED WALLABY",
-                            "BROWN SNAKE",
-                            "MAGPIES",
-                            "SWAMP WALLABY",
-                            "COCKATOO",
-                            "SWAN",
-                            "GALAH"
+                            "EASTERN GREY KANGAROO", "WOMBAT", "BRUSHTAIL POSSUM",
+                            "WALLAROO", "WALLABY", "FOX", "RED NECKED WALLABY",
+                            "BROWN SNAKE", "MAGPIES", "SWAMP WALLABY",
+                            "COCKATOO", "SWAN", "GALAH"
                         ],
                         "range": [
                             "#4e79a7", "#f28e2b", "#e15759", "#76b7b2",
                             "#59a14f", "#edc948", "#b07aa1", "#ff9da7",
-                            "#9c755f", "#bab0ac", "#17becf", "#1f77b4",
-                            "#aec7e8"
+                            "#9c755f", "#bab0ac", "#17becf", "#1f77b4", "#aec7e8"
                         ]
                     }
                 },

@@ -8,23 +8,20 @@
     },
     "width": 550,
     "height": 450,
-    "projection": {
-        "type": "equirectangular",
-        "center": [144.96, -37.81],
-        "scale": 150000
-    },
     "layer": [
         {
             "data": {
-                "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_10m_admin_1_states_provinces.topojson",
+                "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/STE_2021_AUST_GDA2020_thisone.json",
                 "format": {
                     "type": "topojson",
-                    "feature": "ne_10m_admin_1_states_provinces"
+                    "feature": "STE_2021_AUST_GDA2020"
                 }
             },
-            "transform": [
-                {"filter": "datum.properties.iso_a2 == 'AU'"}
-            ],
+            "projection": {
+                "type": "equirectangular",
+                "center": [144.96, -37.81],
+                "scale": 150000
+            },
             "mark": {
                 "type": "geoshape",
                 "fill": "#d4e6c3",
@@ -33,7 +30,14 @@
             }
         },
         {
-            "data": {"url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"},
+            "data": {
+                "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
+            },
+            "projection": {
+                "type": "equirectangular",
+                "center": [144.96, -37.81],
+                "scale": 150000
+            },
             "mark": {
                 "type": "circle",
                 "opacity": 0.8,
