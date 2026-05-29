@@ -1,72 +1,344 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wildlife in Australian Cities</title>
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
 </head>
 <body>
 
-    <!-- SECTION 1 -->
-    <h1>Wildlife in Australian Cities</h1>
-    <p>Intro paragraph...</p>
-
+<!-- ===== HERO ===== -->
+<div class="hero-wrap">
     <div class="pure-g">
-        <div class="pure-u-1-2">
-            <div id="chart1"></div>   <!-- dot map -->
+
+        <div class="pure-u-1 pure-u-md-1-3">
+            <div class="hero-panel">
+                <p class="hero-eyebrow">FIT2179 · DATA VISUALISATION 2<br>MONASH UNIVERSITY · 2026</p>
+                <h1>Wildlife in<br>Australian<br>Cities</h1>
+                <p class="hero-body">
+                    Kangaroos crossing suburban streets. Wombats in backyards.
+                    A possum in the ceiling.<br><br>
+                    Australia's cities are shared with thousands of native species.
+                    This visualisation explores nearly 6,000 wildlife incidents
+                    recorded in Canberra and 670 species sightings from a single
+                    day in Melbourne — to understand where, when, and which
+                    animals live alongside us.
+                </p>
+                <div class="hero-stats">
+                    <div class="hstat">
+                        <span class="hstat-icon">📋</span>
+                        <div>
+                            <div class="hstat-n">5,725</div>
+                            <div class="hstat-l">ACT wildlife incidents<br>2016 – 2026</div>
+                        </div>
+                    </div>
+                    <div class="hstat">
+                        <span class="hstat-icon">🔭</span>
+                        <div>
+                            <div class="hstat-n">670</div>
+                            <div class="hstat-l">BioBlitz sightings<br>Melbourne, Nov 2014</div>
+                        </div>
+                    </div>
+                    <div class="hstat">
+                        <span class="hstat-icon">🦘</span>
+                        <div>
+                            <div class="hstat-n">17</div>
+                            <div class="hstat-l">Species recorded<br>in the ACT dataset</div>
+                        </div>
+                    </div>
+                    <div class="hstat">
+                        <span class="hstat-icon">📍</span>
+                        <div>
+                            <div class="hstat-n">2</div>
+                            <div class="hstat-l">Australian cities<br>explored</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="pure-u-1-2">
-            <div id="chart2"></div>   <!-- top 10 bar -->
+
+        <div class="pure-u-1 pure-u-md-2-3">
+            <div class="content-panel">
+                <div class="part-header">
+                    <span class="part-num">1</span>
+                    <div>
+                        <span class="part-label">PART 1 — MELBOURNE BIOBLITZ 2014</span>
+                        <h2>A single day, hundreds of species</h2>
+                    </div>
+                </div>
+                <p class="section-text">
+                    In November 2014, hundreds of citizen scientists took part in Melbourne's annual
+                    <strong>BioBlitz</strong> — a 24-hour sprint to record as many species as possible
+                    across the city. The result: 670 sightings spanning birds, plants, insects,
+                    mammals and more. The map below plots every sighting geographically.
+                    <em>Click a group in the legend to isolate it.</em>
+                </p>
+                <p class="map-hint">📍 Each dot = one wildlife sighting. Click taxa in the legend to filter.</p>
+                <div id="chart1"></div>
+                <p class="source">Source: Atlas of Living Australia / Participate.</p>
+            </div>
         </div>
+
+    </div>
+</div>
+
+<!-- ===== PART 1 CONTINUED ===== -->
+<div class="page-wrap">
+
+    <div class="card card-full">
+        <h3>Most Sighted Species</h3>
+        <p class="card-text">
+            The <strong>Magpie-lark</strong> topped the list with 17 sightings —
+            a testament to how well this species has adapted to urban parks and gardens.
+            The Common Myna and Silver Gull followed closely. The top 10 is dominated
+            entirely by birds, reflecting their abundance and ease of identification
+            by citizen scientists.
+        </p>
+        <div id="chart2"></div>
+        <p class="source">Top 10 most sighted species across all taxa. Source: Melbourne BioBlitz 2014.</p>
     </div>
 
-    <div class="pure-g">
-        <div class="pure-u-1-3">
-            <div id="chart3"></div>   <!-- donut -->
-        </div>
-        <div class="pure-u-2-3">
-            <div id="chart4"></div>   <!-- area/line -->
-        </div>
+    <div class="card card-full">
+        <h3>Breakdown by Animal Group</h3>
+        <p class="card-text">
+            Plants make up <strong>46% of all sightings</strong> — the largest single group —
+            followed by birds at 42%. Together they account for nearly 9 in 10 sightings.
+            Insects, mammals and reptiles were far less commonly recorded, likely due to
+            their smaller size or more secretive behaviour rather than true absence.
+            <em>Click a segment to highlight it.</em>
+        </p>
+        <div id="chart3"></div>
+        <p class="source">Proportional breakdown of BioBlitz sightings by taxa. Source: Melbourne BioBlitz 2014.</p>
     </div>
 
-    <!-- SECTION 2 -->
-    <h2>When Do They Appear?</h2>
-    <div id="chart5"></div>           <!-- heatmap -->
+</div>
 
-    <!-- SECTION 3 -->
-    <h2>Wildlife Incidents in Canberra</h2>
-    <div class="pure-g">
-        <div class="pure-u-1-2">
-            <div id="chart6"></div>   <!-- ACT map -->
-        </div>
-        <div class="pure-u-1-4">
-            <div id="chart7"></div>   <!-- bar -->
-        </div>
-        <div class="pure-u-1-4">
-            <div id="chart8"></div>   <!-- line -->
+<!-- ===== PART 2 ===== -->
+<div class="stripe-wrap">
+<div class="page-wrap">
+
+    <div class="part-header">
+        <span class="part-num">2</span>
+        <div>
+            <span class="part-label">PART 2 — TIMING &amp; REPORTING</span>
+            <h2>When do they appear, and how are they recorded?</h2>
         </div>
     </div>
+    <p class="section-text">
+        The BioBlitz ran across several weeks of submission windows, but the bulk of records
+        concentrated on the official event day. The heatmap reveals which animal groups used
+        which reporting channels — showing how technology shaped what was recorded.
+    </p>
 
-    <!-- SECTION 4 -->
-    <h2>Melbourne vs Canberra</h2>
-    <div id="chart9"></div>           <!-- grouped bar -->
+    <div class="card card-full">
+        <h3>Sightings Over Time</h3>
+        <p class="card-text">
+            The spike on <strong>15 November 2014</strong> — the official BioBlitz event day —
+            dwarfs all other dates, with over 200 sightings in a single day. The smaller peaks
+            before and after represent early submissions and late entries, reflecting the
+            enthusiastic participation of Melbourne's community naturalists.
+            The red dashed line marks the peak sightings day.
+        </p>
+        <div id="chart4"></div>
+        <p class="source">Daily sighting count across the BioBlitz period. Source: Melbourne BioBlitz 2014.</p>
+    </div>
 
-    <!-- SECTION 5 -->
-    <h2>Biodiversity Hotspots</h2>
-    <div id="chart10"></div>          <!-- choropleth -->
+    <div class="card card-full">
+        <h3>How Were They Reported?</h3>
+        <p class="card-text">
+            Most records came via the <strong>Participate app</strong> and handwritten citizen
+            expert forms. Birds dominated digital reporting via Instagram and Twitter, while
+            plants were predominantly recorded by hand — suggesting that plant identification
+            still relies heavily on expert knowledge. Darker green = more sightings via that channel.
+        </p>
+        <div id="chart5"></div>
+        <p class="source">Taxa vs reporting method heatmap. Source: Melbourne BioBlitz 2014.</p>
+    </div>
 
-    <script type="text/javascript">
-        vegaEmbed('#chart1',  'js/chart1_dot_map.vg.json').catch(console.error);
-        vegaEmbed('#chart2',  'js/chart2_top_species.vg.json').catch(console.error);
-        vegaEmbed('#chart3',  'js/chart3_donut.vg.json').catch(console.error);
-        vegaEmbed('#chart4',  'js/chart4_area_time.vg.json').catch(console.error);
-        vegaEmbed('#chart5',  'js/chart5_heatmap.vg.json').catch(console.error);
-        vegaEmbed('#chart6',  'js/chart6_act_map.vg.json').catch(console.error);
-        vegaEmbed('#chart7',  'js/chart7_incidents_bar.vg.json').catch(console.error);
-        vegaEmbed('#chart8',  'js/chart8_incidents_line.vg.json').catch(console.error);
-        vegaEmbed('#chart9',  'js/chart9_grouped_bar.vg.json').catch(console.error);
-        vegaEmbed('#chart10', 'js/chart10_choropleth.vg.json').catch(console.error);
-    </script>
+</div>
+</div>
+
+<!-- ===== PART 3 ===== -->
+<div class="page-wrap">
+
+    <div class="part-header">
+        <span class="part-num">3</span>
+        <div>
+            <span class="part-label">PART 3 — CANBERRA (ACT)</span>
+            <h2>Wildlife incidents in the nation's capital</h2>
+        </div>
+    </div>
+    <p class="section-text">
+        Unlike Melbourne's voluntary sightings, Canberra's dataset captures
+        <strong>emergency wildlife incidents</strong> — animals that required intervention
+        by ACT wildlife services. Nearly 5,725 incidents were logged between 2016 and 2026.
+        <em>Use the dropdown on the map to filter by species.</em>
+    </p>
+
+    <div class="card card-full">
+        <h3>Incident Locations Across the ACT</h3>
+        <p class="map-hint">📍 Every dot = one recorded wildlife incident. Use the dropdown to filter by species.</p>
+        <div id="chart6"></div>
+        <p class="source">Source: ACT Wildlife Incident Data, 2016–2026.</p>
+    </div>
+
+    <div class="card card-full">
+        <h3>Which Species Appear Most?</h3>
+        <p class="card-text">
+            <strong>Eastern Grey Kangaroos</strong> account for over 2,000 incidents —
+            more than the next three species combined. As Canberra's suburbs expand into
+            kangaroo habitat, encounters are inevitable. Wombats and brushtail possums follow
+            closely. The presence of <strong>foxes</strong> (an introduced pest) highlights
+            the ongoing challenge of managing invasive species alongside native wildlife.
+            Click the legend to highlight a species.
+        </p>
+        <div id="chart7"></div>
+        <p class="source">Top 10 species by total incident count. Source: ACT Wildlife Incidents.</p>
+    </div>
+
+    <div class="card card-full">
+        <h3>A Decade of Incidents</h3>
+        <p class="card-text">
+            Incident counts dipped sharply in <strong>2020–21</strong>, likely reflecting
+            reduced reporting during COVID-19 lockdowns rather than a genuine wildlife decline.
+            Since 2022, numbers have surged to record highs —
+            <strong>2023 recorded 834 incidents</strong>, the highest single year in the dataset.
+            This upward trend suggests that as Canberra grows outward, human-wildlife encounters
+            are becoming more frequent, not less.
+        </p>
+        <div id="chart8"></div>
+        <p class="source">Annual ACT wildlife incident counts, 2016–2026. Note: 2026 is partial (Jan–May only).</p>
+    </div>
+
+</div>
+
+<!-- ===== PART 4 ===== -->
+<div class="stripe-wrap">
+<div class="page-wrap">
+
+    <div class="part-header">
+        <span class="part-num">4</span>
+        <div>
+            <span class="part-label">PART 4 — COMPARISON</span>
+            <h2>Melbourne vs Canberra: two cities, two stories</h2>
+        </div>
+    </div>
+    <p class="section-text">
+        Melbourne and Canberra capture wildlife in very different ways — one through a community
+        celebration of biodiversity, the other through emergency intervention records. Comparing
+        the two reveals the dramatically different wildlife landscapes of Australia's two most
+        studied cities in this dataset.
+    </p>
+
+    <div class="card card-full">
+        <h3>Animal Groups Side by Side</h3>
+        <p class="card-text">
+            Canberra's mammal count of <strong>5,213</strong> towers over Melbourne's 24 sightings —
+            not because Melbourne has fewer mammals, but because the datasets measure different
+            things. Birds appear at similar rates in both cities (~311–312), suggesting consistent
+            urban bird populations across south-eastern Australia.
+        </p>
+        <div id="chart9"></div>
+        <p class="source">Note: Melbourne = voluntary sightings (BioBlitz, one day). Canberra = emergency incidents (10 years). Direct comparison should account for these methodological differences.</p>
+    </div>
+
+</div>
+</div>
+
+<!-- ===== PART 5 ===== -->
+<div class="page-wrap">
+
+    <div class="part-header">
+        <span class="part-num">5</span>
+        <div>
+            <span class="part-label">PART 5 — GEOGRAPHIC COVERAGE</span>
+            <h2>Where does our data come from?</h2>
+        </div>
+    </div>
+    <p class="section-text">
+        Australia spans nearly 7.7 million square kilometres, yet detailed urban wildlife data
+        remains concentrated in just a handful of cities. This choropleth shows the geographic
+        coverage of the two datasets — highlighting both what we know, and the vast gaps that
+        remain across the continent.
+    </p>
+
+    <div class="card card-full">
+        <h3>Wildlife Records by State</h3>
+        <div id="chart10"></div>
+        <p class="source">Dark green = ACT (5,725 incidents). Mid green = Victoria (670 sightings). Grey = no data. Source: ACT Government Wildlife Services &amp; Atlas of Living Australia. Australian State Boundaries — ABS ASGS Edition 3 (GDA2020), simplified via Mapshaper.</p>
+    </div>
+
+    <div class="insight-box">
+        <h3>🌿 What this tells us</h3>
+        <p>
+            The concentration of data in just two states reflects a broader challenge in urban
+            ecology: systematic wildlife monitoring in Australia is still in its early stages.
+            Western Australia, Queensland, and the Northern Territory — which together cover
+            over 60% of the continent — have no comparable urban wildlife databases publicly
+            available. Expanding citizen science programs like BioBlitz and standardised wildlife
+            reporting to other cities could dramatically improve our understanding of how native
+            species are adapting to Australia's rapidly urbanising landscape.
+        </p>
+    </div>
+
+</div>
+
+<!-- ===== ABOUT + SOURCES ===== -->
+<div class="stripe-wrap">
+<div class="page-wrap">
+    <div class="pure-g">
+
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="about-block">
+                <h3>🔬 About this visualisation</h3>
+                <p>
+                    Created for <strong>FIT2179 Data Visualisation 2</strong>, Monash University,
+                    Semester 1, 2026. The topic — urban wildlife in Australian cities — was chosen
+                    for its relevance to everyday Australians and its intersection of ecology,
+                    urban planning, and community science. All Vega-Lite specifications are available
+                    in the <code>/js</code> folder of this repository, formatted for human readability.
+                    Generative AI tools were used to assist with code debugging and narrative proofreading.
+                </p>
+            </div>
+        </div>
+
+        <div class="pure-u-1 pure-u-md-1-2">
+            <div class="about-block">
+                <h3>📂 Data Sources</h3>
+                <ul class="src-list">
+                    <li><strong>ACT Wildlife Incidents</strong> — ACT Government wildlife services emergency callout data, 2016–2026. Contains species, date, and GPS coordinates for ~5,725 incidents.</li>
+                    <li><strong>Melbourne BioBlitz 2014</strong> — Citizen science sightings recorded during the Melbourne BioBlitz, November 2014. Sourced via the Atlas of Living Australia / Participate program.</li>
+                    <li><strong>Australian State Boundaries</strong> — ABS ASGS Edition 3, States and Territories 2021 (GDA2020). Simplified via Mapshaper.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="footer-bar">
+    FIT2179 Data Visualisation 2 · Monash University · Semester 1, 2026 · Nikhil Depala
+</div>
+
+<script type="text/javascript">
+    vegaEmbed('#chart1',  'js/chart1_dot_map.vg.json').catch(console.error);
+    vegaEmbed('#chart2',  'js/chart2_top_species.vg.json').catch(console.error);
+    vegaEmbed('#chart3',  'js/chart3_donut.vg.json').catch(console.error);
+    vegaEmbed('#chart4',  'js/chart4_area_time.vg.json').catch(console.error);
+    vegaEmbed('#chart5',  'js/chart5_heatmap.vg.json').catch(console.error);
+    vegaEmbed('#chart6',  'js/chart6_act_map.vg.json').catch(console.error);
+    vegaEmbed('#chart7',  'js/chart7_incidents_bar.vg.json').catch(console.error);
+    vegaEmbed('#chart8',  'js/chart8_incidents_line.vg.json').catch(console.error);
+    vegaEmbed('#chart9',  'js/chart9_grouped_bar.vg.json').catch(console.error);
+    vegaEmbed('#chart10', 'js/chart10_choropleth.vg.json').catch(console.error);
+</script>
+
 </body>
 </html>

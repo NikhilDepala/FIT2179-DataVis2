@@ -7,7 +7,7 @@
         "anchor": "middle"
     },
     "width": 450,
-    "height": 250,
+    "height": 200,
     "data": {
         "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
     },
@@ -16,17 +16,27 @@
             "filter": "datum['Data Resource Name'] != null && datum['Data Resource Name'] != ''"
         },
         {
+            "filter": "datum.Taxa == 'Bird' || datum.Taxa == 'Plant' || datum.Taxa == 'Insect' || datum.Taxa == 'Mammal' || datum.Taxa == 'Reptile'"
+        },
+        {
             "aggregate": [{"op": "count", "as": "count"}],
             "groupby": ["Taxa", "Data Resource Name"]
+        },
+        {
+            "impute": "count",
+            "key": "Data Resource Name",
+            "groupby": ["Taxa"],
+            "value": 0
         }
     ],
-    "mark": {"type": "rect", "stroke": "white", "strokeWidth": 1},
+    "mark": {"type": "rect", "stroke": "white", "strokeWidth": 2},
     "encoding": {
         "y": {
             "field": "Taxa",
             "type": "nominal",
             "title": "Animal Group",
-            "axis": {"labelFontSize": 12}
+            "axis": {"labelFontSize": 12},
+            "sort": ["Bird", "Plant", "Insect", "Mammal", "Reptile"]
         },
         "x": {
             "field": "Data Resource Name",
@@ -41,9 +51,10 @@
         "color": {
             "field": "count",
             "type": "quantitative",
-            "title": "Sightings",
+            "title": "No. of Sightings",
             "scale": {
-                "scheme": "greens"
+                "range": ["#edf8e9", "#a1d99b", "#74c476", "#31a354", "#006d2c"],
+                "domainMin": 0
             },
             "legend": {
                 "title": "No. of Sightings",

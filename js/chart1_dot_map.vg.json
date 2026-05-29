@@ -20,7 +20,7 @@
             "projection": {
                 "type": "equirectangular",
                 "center": [144.96, -37.81],
-                "scale": 150000
+                "scale": 120000
             },
             "mark": {
                 "type": "geoshape",
@@ -36,8 +36,11 @@
             "projection": {
                 "type": "equirectangular",
                 "center": [144.96, -37.81],
-                "scale": 150000
+                "scale": 120000
             },
+            "transform": [
+                {"filter": "datum.Latitude != '' && datum.Longitude != ''"}
+            ],
             "mark": {
                 "type": "circle",
                 "opacity": 0.8,

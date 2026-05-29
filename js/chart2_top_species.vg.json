@@ -7,20 +7,18 @@
         "anchor": "middle"
     },
     "width": 400,
-    "height": 350,
+    "height": 320,
     "data": {
         "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
     },
     "transform": [
         {
-            "aggregate": [{"op": "count", "as": "count"}],
-            "groupby": ["Common Name", "Taxa"]
+            "filter": "datum['Common Name'] == 'Magpie-lark' || datum['Common Name'] == 'Common Myna, Indian Myna' || datum['Common Name'] == 'Silver Gull' || datum['Common Name'] == 'Red Wattlebird' || datum['Common Name'] == 'Rainbow Lorikeet' || datum['Common Name'] == 'Spotted Dove' || datum['Common Name'] == 'Rock Dove, Feral Pigeon' || datum['Common Name'] == 'Welcome Swallow' || datum['Common Name'] == 'Chestnut Teal' || datum['Common Name'] == 'Crested Pigeon'"
         },
         {
-            "window": [{"op": "rank", "as": "rank"}],
-            "sort": [{"field": "count", "order": "descending"}]
-        },
-        {"filter": "datum.rank <= 10"}
+            "aggregate": [{"op": "count", "as": "count"}],
+            "groupby": ["Common Name"]
+        }
     ],
     "mark": {"type": "bar", "cornerRadiusEnd": 4},
     "encoding": {
@@ -37,17 +35,13 @@
             "title": "Number of Sightings"
         },
         "color": {
-            "field": "Taxa",
-            "type": "nominal",
-            "title": "Animal Group",
-            "scale": {
-                "domain": ["Bird", "Plant", "Insect", "Mammal", "Reptile", "Amphibian", "Cnidaria", "Fungi"],
-                "range": ["#1f77b4", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b", "#17becf", "#e377c2", "#bcbd22"]
-            }
+            "field": "count",
+            "type": "quantitative",
+            "scale": {"scheme": "blues"},
+            "legend": null
         },
         "tooltip": [
             {"field": "Common Name", "type": "nominal", "title": "Species"},
-            {"field": "Taxa", "type": "nominal", "title": "Group"},
             {"field": "count", "type": "quantitative", "title": "Sightings"}
         ]
     }
