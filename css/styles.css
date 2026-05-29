@@ -15,7 +15,7 @@ body {
 
 /* === LAYOUT === */
 .page-wrap {
-    max-width: 1140px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 36px 24px;
 }
