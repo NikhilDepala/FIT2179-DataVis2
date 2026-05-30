@@ -6,7 +6,7 @@
         "font": "sans-serif",
         "anchor": "middle"
     },
-    "width": 700,
+    "width": "container",
     "height": 500,
     "layer": [
         {

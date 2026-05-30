@@ -6,7 +6,7 @@
         "font": "sans-serif",
         "anchor": "middle"
     },
-    "width": 350,
+    "width": "container",
     "height": 300,
     "data": {
         "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/act_incidents.csv"

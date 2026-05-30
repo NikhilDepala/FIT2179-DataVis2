@@ -1,81 +1,76 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": {
-        "text": "Wildlife Sightings Across Melbourne (BioBlitz 2014)",
-        "fontSize": 16,
-        "font": "sans-serif",
-        "anchor": "middle"
-    },
-    "width": "container",
-    "height": 420,
-    "layer": [
-        {
-            "data": {
-                "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/STE_2021_AUST_GDA2020_thisone.json",
-                "format": {
-                    "type": "topojson",
-                    "feature": "STE_2021_AUST_GDA2020"
-                }
-            },
-            "projection": {
-                "type": "equirectangular",
-                "center": [144.96, -37.81],
-                "scale": 120000
-            },
-            "mark": {
-                "type": "geoshape",
-                "fill": "#d4e6c3",
-                "stroke": "#888",
-                "strokeWidth": 0.8
-            }
-        },
-        {
-            "data": {
-                "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
-            },
-            "projection": {
-                "type": "equirectangular",
-                "center": [144.96, -37.81],
-                "scale": 120000
-            },
-            "transform": [
-                {"filter": "datum.Latitude != '' && datum.Longitude != ''"}
-            ],
-            "mark": {
-                "type": "circle",
-                "opacity": 0.8,
-                "size": 80
-            },
-            "params": [
-                {
-                    "name": "taxa_highlight",
-                    "select": {"type": "point", "fields": ["Taxa"]},
-                    "bind": "legend"
-                }
-            ],
-            "encoding": {
-                "longitude": {"field": "Longitude", "type": "quantitative"},
-                "latitude": {"field": "Latitude", "type": "quantitative"},
-                "color": {
-                    "field": "Taxa",
-                    "type": "nominal",
-                    "title": "Animal Group",
-                    "scale": {
-                        "domain": ["Bird", "Plant", "Insect", "Mammal", "Reptile", "Amphibian", "Cnidaria", "Fungi"],
-                        "range": ["#1f77b4", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b", "#17becf", "#e377c2", "#bcbd22"]
-                    }
-                },
-                "opacity": {
-                    "condition": {"param": "taxa_highlight", "value": 0.8},
-                    "value": 0.1
-                },
-                "tooltip": [
-                    {"field": "Common Name", "type": "nominal", "title": "Species"},
-                    {"field": "Taxa", "type": "nominal", "title": "Group"},
-                    {"field": "Sighting Date", "type": "nominal", "title": "Date"},
-                    {"field": "Data Resource Name", "type": "nominal", "title": "Reported Via"}
-                ]
-            }
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Wildlife Sightings Across Melbourne (BioBlitz 2014)",
+    "fontSize": 16,
+    "font": "sans-serif",
+    "anchor": "middle"
+  },
+  "width": "container",
+  "height": 450,
+  "projection": {
+    "type": "equirectangular",
+    "center": [144.96, -37.81],
+    "scale": 120000
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/STE_2021_AUST_GDA2020_thisone.json",
+        "format": {
+          "type": "topojson",
+          "feature": "STE_2021_AUST_GDA2020"
         }
-    ]
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#d4e6c3",
+        "stroke": "#888",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
+      },
+      "transform": [
+        {"filter": "datum.Latitude != '' && datum.Longitude != ''"}
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.8,
+        "size": 80
+      },
+      "params": [
+        {
+          "name": "taxa_highlight",
+          "select": {"type": "point", "fields": ["Taxa"]},
+          "bind": "legend"
+        }
+      ],
+      "encoding": {
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+        "color": {
+          "field": "Taxa",
+          "type": "nominal",
+          "title": "Animal Group",
+          "scale": {
+            "domain": ["Bird", "Plant", "Insect", "Mammal", "Reptile", "Amphibian", "Cnidaria", "Fungi"],
+            "range": ["#1f77b4", "#2ca02c", "#ff7f0e", "#9467bd", "#8c564b", "#17becf", "#e377c2", "#bcbd22"]
+          }
+        },
+        "opacity": {
+          "condition": {"param": "taxa_highlight", "value": 0.8},
+          "value": 0.1
+        },
+        "tooltip": [
+          {"field": "Common Name", "type": "nominal", "title": "Species"},
+          {"field": "Taxa", "type": "nominal", "title": "Group"},
+          {"field": "Sighting Date", "type": "nominal", "title": "Date"},
+          {"field": "Data Resource Name", "type": "nominal", "title": "Reported Via"}
+        ]
+      }
+    }
+  ]
 }
