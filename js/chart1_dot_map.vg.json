@@ -6,8 +6,8 @@
         "font": "sans-serif",
         "anchor": "middle"
     },
-    "width": 550,
-    "height": 450,
+    "width": "container",
+    "height": 420,
     "layer": [
         {
             "data": {

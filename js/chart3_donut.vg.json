@@ -6,8 +6,8 @@
     "font": "sans-serif",
     "anchor": "middle"
   },
-  "width": 380,
-  "height": 380,
+  "width": "container",
+  "height": 320,
   "data": {
     "url": "https://raw.githubusercontent.com/NikhilDepala/FIT2179-DataVis2/main/data/bioblitz.csv"
   },
